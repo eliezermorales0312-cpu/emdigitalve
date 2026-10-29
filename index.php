@@ -4,7 +4,8 @@ require_once 'conexion.php';
 $config = [];
 $demos = [];
 
-if ($pdo) {
+// Blindaje contra fallos de conexión para que no se caiga la página
+if (isset($pdo) && $pdo) {
     try {
         $stmt = $pdo->query("SELECT clave, valor FROM configuracion");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -132,7 +133,7 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             line-height: 1.6;
         }
 
-        /* Botones Principales (Naranja Neón y Plata Neón) */
+        /* Botones Principales */
         .btn-main-whatsapp {
             background-color: #ff3300;
             color: #ffffff;
@@ -285,53 +286,6 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             box-shadow: 0 0 12px rgba(192,192,192,0.8);
         }
 
-        /* Formulario Contacto */
-        .contact-box {
-            background: #0d121e;
-            border: 1px solid #1a233a;
-            border-radius: 10px;
-            padding: 40px;
-            max-width: 750px;
-            margin: 0 auto;
-        }
-        .form-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .form-control-custom {
-            background: #07090f;
-            border: 1px solid #1e293b;
-            color: #ffffff;
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 0.9rem;
-        }
-        .form-control-custom:focus {
-            background: #07090f;
-            border-color: #ff3300;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(255,51,0,0.3);
-        }
-        .btn-enviar {
-            background-color: #ff3300;
-            color: #ffffff;
-            font-weight: 700;
-            border: none;
-            border-radius: 6px;
-            padding: 12px;
-            width: 100%;
-            box-shadow: 0 0 15px rgba(255,51,0,0.4);
-            transition: all 0.3s;
-        }
-        .btn-enviar:hover {
-            background-color: #c0c0c0;
-            color: #07090f;
-            box-shadow: 0 0 20px rgba(192,192,192,0.8);
-        }
-        
         footer {
             padding: 40px 0;
             text-align: center;
@@ -363,9 +317,7 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#demos">Demos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#planes">Planes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                     <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
                         <a href="admin_login.php" class="btn-agregar-demo">+ AGREGAR DEMO</a>
                     </li>
@@ -467,7 +419,6 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Botones directos a WhatsApp</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Ubicación Google Maps</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Carga Ultra Rápida</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Adaptado a normativas legales y fiscales VE</li>
                         </ul>
                         <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Landing%20Emprendedor" target="_blank" class="btn-plan mt-auto">CONSULTAR PLAN</a>
                     </div>
@@ -485,9 +436,8 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Catálogo interactivo de productos</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Buscador y filtros por categoría</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Pedidos automáticos al WhatsApp</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Estándares fiscales y legales venezolanos</li>
                         </ul>
-                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Catálogo%20/%20Negocios" target="_blank" class="btn-plan btn-plan-popular mt-auto">CONSULTAR PLAN</a>
+                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Catalogo" target="_blank" class="btn-plan btn-plan-popular mt-auto">CONSULTAR PLAN</a>
                     </div>
                 </div>
 
@@ -495,49 +445,18 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                 <div class="col-md-4">
                     <div class="card-custom d-flex flex-column">
                         <span class="badge-plan">AVANZADO</span>
-                        <h3 class="fw-bold text-white mb-2" style="font-size: 1.3rem;">Sistema a Medida</h3>
-                        <p class="text-secondary" style="font-size: 0.85rem;">Desarrollos complejos con paneles administrativos e inventario.</p>
-                        <div class="price-tag">Desde 300$ <span>/ proyecto</span></div>
+                        <h3 class="fw-bold text-white mb-2" style="font-size: 1.3rem;">Sistema a la Medida</h3>
+                        <p class="text-secondary" style="font-size: 0.85rem;">Plataformas robustas y paneles administrativos completos.</p>
+                        <div class="price-tag">280$+ <span>/ proyecto</span></div>
                         <ul class="list-unstyled text-secondary mb-4" style="font-size: 0.85rem;">
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Panel de Control / Dashboard</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Gestión de datos local o en nube</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Módulos personalizados</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Soporte técnico directo</li>
-                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Requerimientos fiscales y legales adaptados</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Panel de control (CRUD completo)</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Base de datos personalizada</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Autenticación y seguridad</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Escalable y optimizado</li>
                         </ul>
-                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Sistema%20a%20Medida" target="_blank" class="btn-plan mt-auto">CONSULTAR PLAN</a>
+                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20un%20Sistema%20a%20la%20Medida" target="_blank" class="btn-plan mt-auto">CONSULTAR PLAN</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Servicios Anchor -->
-    <div id="servicios"></div>
-
-    <!-- Contacto Section -->
-    <section id="contacto" class="py-5">
-        <div class="container">
-            <span class="section-header-tag">// COMUNICACIÓN DIRECTA</span>
-            <h2 class="section-title">SUGERENCIAS &amp; CONTACTO</h2>
-            <p class="section-desc">¿Tienes un proyecto en mente o alguna pregunta? Escríbenos directamente.</p>
-            
-            <div class="contact-box">
-                <form action="procesar_contacto.php" method="POST">
-                    <div class="mb-3">
-                        <label class="form-label">Nombre / Empresa</label>
-                        <input type="text" class="form-control form-control-custom" placeholder="Ej: Repuestos El Pana" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">WhatsApp o Correo</label>
-                        <input type="text" class="form-control form-control-custom" placeholder="Ej: 0412-1234567" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label">Mensaje / Sugerencia</label>
-                        <textarea class="form-control form-control-custom" rows="4" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-enviar">ENVIAR MENSAJE</button>
-                </form>
             </div>
         </div>
     </section>
@@ -545,10 +464,8 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="mb-1">© 2026 EM Digital VE - Eliezer Morales. Todos los derechos reservados.</p>
-            <p class="mb-0">
-                <a href="<?php echo $instagram; ?>" target="_blank" style="color: #ff3300; text-decoration: none;">@EM.digital.ve</a>
-            </p>
+            <p class="mb-1">&copy; <?php echo date('Y'); ?> EM Digital VE - Eliezer Morales. Todos los derechos reservados.</p>
+            <p class="mb-0" style="font-size: 0.75rem;">Barcelona, Puerto La Cruz y Lechería, Estado Anzoátegui.</p>
         </div>
     </footer>
 

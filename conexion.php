@@ -1,10 +1,10 @@
 <?php
-// Conexión directa y fija para EM Digital VE en Render
-$host     = 'dpg-...'; // <--- Pega aquí el Host exacto que te da Render
-$dbname   = 'emdigitalve'; // <--- Pega aquí el nombre exacto de la base de datos
-$user     = '...'; // <--- Pega aquí el usuario exacto
-$password = '...'; // <--- Pega aquí la contraseña exacta
-$port     = '3306'; // <--- Puerto de MySQL
+// Conexión local definitiva para XAMPP - EM Digital VE
+$host     = '127.0.0.1';
+$dbname   = 'emdigitalve_db';
+$user     = 'admin';
+$password = 'Eliezer26072104';
+$port     = '3306';
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
@@ -13,7 +13,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("<div style='background: #111; color: #ff5555; padding: 20px; font-family: monospace; border: 2px solid #ff5555;'>
-        <h3>[EM Digital VE] Error Directo:</h3>
+        <h3>[EM Digital VE] Error de Conexión Local:</h3>
         <p>" . $e->getMessage() . "</p>
     </div>");
 }

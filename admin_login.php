@@ -6,7 +6,7 @@ $error = '';
 
 // Verificamos si $pdo existe y no es nulo antes de hacer consultas
 if (!isset($pdo) || $pdo === null) {
-    $error = "Error crítico: No hay conexión con la base de datos. Revisa el archivo conexion.php o las credenciales en Render.";
+    $error = "Error crítico: No hay conexión con la base de datos. Revisa el archivo conexion.php.";
 }
 
 // Lógica de inicio de sesión cuando envían el formulario
