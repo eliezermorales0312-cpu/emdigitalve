@@ -132,28 +132,28 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             line-height: 1.6;
         }
 
-        /* Botones Principales */
+        /* Botones Principales (Naranja Neón y Plata Neón) */
         .btn-main-whatsapp {
-            background-color: #00f3ff;
-            color: #07090f;
+            background-color: #ff3300;
+            color: #ffffff;
             font-weight: 700;
             border: none;
             border-radius: 6px;
             padding: 12px 25px;
             font-size: 0.9rem;
-            box-shadow: 0 0 15px rgba(0,243,255,0.4);
+            box-shadow: 0 0 15px rgba(255,51,0,0.5);
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
         }
         .btn-main-whatsapp:hover {
-            background-color: #ffffff;
-            box-shadow: 0 0 20px rgba(255,255,255,0.7);
+            background-color: #c0c0c0;
             color: #07090f;
+            box-shadow: 0 0 20px rgba(192,192,192,0.8);
         }
         .btn-main-instagram {
             background: transparent;
-            border: 1px solid #ff3300;
+            border: 1px solid #c0c0c0;
             color: #ffffff;
             font-weight: 600;
             border-radius: 6px;
@@ -164,7 +164,7 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             display: inline-block;
         }
         .btn-main-instagram:hover {
-            border-color: #ffffff;
+            border-color: #ff3300;
             color: #ff3300;
             box-shadow: 0 0 12px rgba(255,51,0,0.5);
         }
@@ -225,8 +225,9 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
         }
 
         .badge-plan {
-            background: #00f3ff;
-            color: #07090f;
+            background: transparent;
+            border: 1px solid #ff3300;
+            color: #ff3300;
             font-weight: 700;
             font-size: 0.7rem;
             padding: 4px 12px;
@@ -254,8 +255,8 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
 
         .btn-plan {
             background: transparent;
-            border: 1px solid #00f3ff;
-            color: #00f3ff;
+            border: 1px solid #ff3300;
+            color: #ff3300;
             width: 100%;
             padding: 10px;
             border-radius: 6px;
@@ -268,18 +269,20 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             margin-top: 25px;
         }
         .btn-plan:hover {
-            background: #00f3ff;
-            color: #07090f;
-            box-shadow: 0 0 12px rgba(0,243,255,0.5);
-        }
-        .btn-plan-popular {
-            border-color: #ff3300;
-            color: #ff3300;
-        }
-        .btn-plan-popular:hover {
             background: #ff3300;
             color: #ffffff;
             box-shadow: 0 0 12px rgba(255,51,0,0.6);
+        }
+        .btn-plan-popular {
+            background: #ff3300;
+            color: #ffffff;
+            border-color: #ff3300;
+        }
+        .btn-plan-popular:hover {
+            background: #c0c0c0;
+            color: #07090f;
+            border-color: #c0c0c0;
+            box-shadow: 0 0 12px rgba(192,192,192,0.8);
         }
 
         /* Formulario Contacto */
@@ -324,8 +327,9 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
             transition: all 0.3s;
         }
         .btn-enviar:hover {
-            background-color: #ff4500;
-            box-shadow: 0 0 20px rgba(255,51,0,0.7);
+            background-color: #c0c0c0;
+            color: #07090f;
+            box-shadow: 0 0 20px rgba(192,192,192,0.8);
         }
         
         footer {
@@ -459,10 +463,11 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                         <p class="text-secondary" style="font-size: 0.85rem;">Ideal para presencia rápida y directa en Google y redes sociales.</p>
                         <div class="price-tag">80$ - 130$ <span>/ proyecto</span></div>
                         <ul class="list-unstyled text-secondary mb-4" style="font-size: 0.85rem;">
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Diseño Responsive (Móvil / PC)</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Botones directos a WhatsApp</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Ubicación Google Maps</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Carga Ultra Rápida</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Diseño Responsive (Móvil / PC)</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Botones directos a WhatsApp</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Ubicación Google Maps</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Carga Ultra Rápida</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Adaptado a normativas legales y fiscales VE</li>
                         </ul>
                         <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Landing%20Emprendedor" target="_blank" class="btn-plan mt-auto">CONSULTAR PLAN</a>
                     </div>
@@ -480,6 +485,7 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Catálogo interactivo de productos</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Buscador y filtros por categoría</li>
                             <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Pedidos automáticos al WhatsApp</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Estándares fiscales y legales venezolanos</li>
                         </ul>
                         <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Catálogo%20/%20Negocios" target="_blank" class="btn-plan btn-plan-popular mt-auto">CONSULTAR PLAN</a>
                     </div>
@@ -493,10 +499,11 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
                         <p class="text-secondary" style="font-size: 0.85rem;">Desarrollos complejos con paneles administrativos e inventario.</p>
                         <div class="price-tag">Desde 300$ <span>/ proyecto</span></div>
                         <ul class="list-unstyled text-secondary mb-4" style="font-size: 0.85rem;">
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Panel de Control / Dashboard</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Gestión de datos local o en nube</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Módulos personalizados</li>
-                            <li class="mb-2"><i class="fas fa-check text-info me-2"></i> Soporte técnico directo</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Panel de Control / Dashboard</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Gestión de datos local o en nube</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Módulos personalizados</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Soporte técnico directo</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Requerimientos fiscales y legales adaptados</li>
                         </ul>
                         <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20estoy%20interesado%20en%20el%20Plan%20Sistema%20a%20Medida" target="_blank" class="btn-plan mt-auto">CONSULTAR PLAN</a>
                     </div>
@@ -505,7 +512,7 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
         </div>
     </section>
 
-    <!-- Servicios Anchor (Sección extra si la piden en el menú) -->
+    <!-- Servicios Anchor -->
     <div id="servicios"></div>
 
     <!-- Contacto Section -->
