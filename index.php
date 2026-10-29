@@ -1,8 +1,7 @@
 <?php
-// Incluimos la conexión a la base de datos (con protección anti-caídas para la nube)
+// Conexión segura para Render (si no hay BD en la nube, la web carga igual sin caerse)
 require_once 'conexion.php';
 
-// Cargar configuración de contacto por defecto o desde la BD si está disponible
 $config = [];
 $demos = [];
 
@@ -20,7 +19,6 @@ if ($pdo) {
     } catch (PDOException $e) {}
 }
 
-// Datos por defecto para que la web luzca completa y profesional en la nube
 $telefono_ws = isset($config['telefono_whatsapp']) && !empty($config['telefono_whatsapp']) 
     ? $config['telefono_whatsapp'] 
     : '04223770933';
@@ -43,53 +41,95 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #0b0f19;
-            color: #f8f9fa;
+            color: #e5e7eb;
         }
         .navbar {
             background-color: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #ff6600;
         }
         .hero-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0b0f19 0%, #1a1f2c 100%);
+            padding: 120px 0 80px 0;
+            background: linear-gradient(135deg, #0b0f19 0%, #161b22 100%);
             text-align: center;
         }
         .hero-title {
             font-weight: 700;
-            color: #00ffcc;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+            color: #ff6600;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.5), 0 0 40px rgba(192, 192, 192, 0.2);
+        }
+        .hero-subtitle {
+            color: #c0c0c0;
+            text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
         }
         .card-plan {
-            background: #161b22;
-            border: 1px solid #30363d;
+            background: #121824;
+            border: 2px solid #ff6600;
             border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card-plan:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
-            border-color: #00ffcc;
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(192, 192, 192, 0.4);
+            border-color: #c0c0c0;
         }
-        .btn-neon {
-            background-color: #00ffcc;
+        .card-plan h3 {
+            color: #ff6600;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.4);
+        }
+        .card-plan p, .card-plan li {
+            color: #c0c0c0;
+        }
+        .btn-neon-orange {
+            background-color: #ff6600;
             color: #0b0f19;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 50px;
-            padding: 10px 25px;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+            padding: 12px 30px;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
-        .btn-neon:hover {
-            background-color: #fff;
+        .btn-neon-orange:hover {
+            background-color: #c0c0c0;
             color: #0b0f19;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 30px rgba(192, 192, 192, 0.9);
+        }
+        .btn-neon-silver {
+            background-color: #c0c0c0;
+            color: #0b0f19;
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 12px 30px;
+            box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-neon-silver:hover {
+            background-color: #ff6600;
+            color: #0b0f19;
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.9);
+        }
+        .section-title {
+            color: #ff6600;
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+        }
+        .municipios-box {
+            background: #121824;
+            border: 1px solid #c0c0c0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(192, 192, 192, 0.2);
+            color: #c0c0c0;
         }
         footer {
-            background-color: #080b11;
-            padding: 30px 0;
+            background-color: #070a0f;
+            padding: 40px 0;
             text-align: center;
-            border-top: 1px solid #21262d;
-            color: #8b949e;
+            border-top: 1px solid #ff6600;
+            color: #c0c0c0;
         }
     </style>
 </head>
@@ -98,19 +138,21 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#" style="color: #00ffcc;">
-                <i class="fas5 fa-code"></i> EM Digital VE
+            <a class="navbar-brand fw-bold" href="#" style="color: #ff6600; text-shadow: 0 0 10px rgba(255,102,0,0.5);">
+                <i class="fas fa-code"></i> EM Digital VE
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#planes">Planes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#municipios">Municipios</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#planes">Planes</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#demos">Demos</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#contacto">Contacto</a></li>
                     <li class="nav-item ms-3">
-                        <a href="admin_login.php" class="btn btn-outline-light btn-sm px-3">
+                        <a href="admin_login.php" class="btn btn-outline-light btn-sm px-3" style="border-color: #c0c0c0; color: #c0c0c0;">
                             <i class="fas fa-lock"></i> Admin
                         </a>
                     </li>
@@ -122,59 +164,121 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
     <!-- Hero Section -->
     <header id="inicio" class="hero-section">
         <div class="container">
-            <h1 class="hero-title display-4 mb-4">Lleva tu Negocio al Siglo Digital</h1>
-            <p class="lead text-muted mb-5">Creamos páginas web profesionales, rápidas y adaptadas al mercado venezolano con especificaciones fiscales y legales.</p>
-            <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20quiero%20información%20sobre%20sus%20servicios%20web" target="_blank" class="btn btn-neon btn-lg">
+            <h1 class="hero-title display-4 mb-3">Lleva tu Negocio al Siglo Digital</h1>
+            <p class="hero-subtitle lead mb-4" style="max-width: 700px; margin: 0 auto;">Páginas web profesionales, rápidas y adaptadas al mercado venezolano con especificaciones fiscales y legales.</p>
+            <div class="mb-4">
+                <span class="badge px-3 py-2 me-2" style="background-color: #ff6600; color: #0b0f19; font-weight: 600;">Teléfono: <?php echo $telefono_ws; ?></span>
+                <span class="badge px-3 py-2" style="background-color: #c0c0c0; color: #0b0f19; font-weight: 600;">Cobertura en 4 Municipios</span>
+            </div>
+            <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Hola,%20quiero%20información%20sobre%20sus%20servicios%20web" target="_blank" class="btn btn-neon-orange btn-lg">
                 <i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp
             </a>
         </div>
     </header>
 
+    <!-- Municipios Section -->
+    <section id="municipios" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4 section-title fw-bold">Nuestra Cobertura</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="municipios-box text-center">
+                        <p class="mb-0 fs-5">Brindamos soporte y soluciones digitales directas en los <strong>4 Municipios</strong> principales de la zona, garantizando atención personalizada y presencial o digital inmediata.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Planes Section -->
     <section id="planes" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5 fw-bold" style="color: #00ffcc;">Nuestros Planes</h2>
+            <h2 class="text-center mb-5 section-title fw-bold">Nuestros Planes</h2>
             <div class="row g-4">
                 <!-- Plan 1 -->
                 <div class="col-md-4">
-                    <div class="card card-plan p-4 h-100 text-white">
+                    <div class="card card-plan p-4 h-100">
                         <h3 class="fw-bold mb-3">Emprendedor</h3>
-                        <p class="text-muted">Ideal para pequeños negocios que inician en internet.</p>
+                        <p>Ideal para pequeños negocios que inician en internet.</p>
                         <ul class="list-unstyled mb-4">
-                            <li><i class="fas fa-check text-success me-2"></i> Diseño 100% responsivo</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Botones de WhatsApp e Instagram</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Opción de facturación legal</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Diseño 100% responsivo</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Botones de WhatsApp e Instagram</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Facturación y normas fiscales</li>
                         </ul>
-                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Emprendedor" target="_blank" class="btn btn-neon mt-auto">¡Lo quiero!</a>
+                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Emprendedor" target="_blank" class="btn btn-neon-orange mt-auto text-center">¡Lo quiero!</a>
                     </div>
                 </div>
                 <!-- Plan 2 -->
                 <div class="col-md-4">
-                    <div class="card card-plan p-4 h-100 text-white border-primary" style="border-color: #00ffcc !important;">
-                        <h3 class="fw-bold mb-3" style="color: #00ffcc;">Negocio</h3>
-                        <p class="text-muted">Para marcas consolidadas que exigen mayor presencia.</p>
+                    <div class="card card-plan p-4 h-100" style="border-color: #c0c0c0; box-shadow: 0 0 25px rgba(192,192,192,0.2);">
+                        <h3 class="fw-bold mb-3" style="color: #c0c0c0; text-shadow: 0 0 10px rgba(192,192,192,0.5);">Negocio</h3>
+                        <p>Para marcas consolidadas que exigen mayor presencia y nivel.</p>
                         <ul class="list-unstyled mb-4">
-                            <li><i class="fas fa-check text-success me-2"></i> Todo lo del plan emprendedor</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Incluye facturas fiscales y SENIAT</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Panel autoadministrable</li>
+                            <li class="mb-2"><i class="fas fa-check text-light me-2"></i> Todo lo del plan emprendedor</li>
+                            <li class="mb-2"><i class="fas fa-check text-light me-2"></i> Facturas fiscales y adaptadas al SENIAT</li>
+                            <li class="mb-2"><i class="fas fa-check text-light me-2"></i> Panel autoadministrable</li>
                         </ul>
-                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Negocio" target="_blank" class="btn btn-neon mt-auto">¡Lo quiero!</a>
+                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Negocio" target="_blank" class="btn btn-neon-silver mt-auto text-center">¡Lo quiero!</a>
                     </div>
                 </div>
                 <!-- Plan 3 -->
                 <div class="col-md-4">
-                    <div class="card card-plan p-4 h-100 text-white">
+                    <div class="card card-plan p-4 h-100">
                         <h3 class="fw-bold mb-3">Corporativo</h3>
-                        <p class="text-muted">Solución avanzada para empresas de gran envergadura.</p>
+                        <p>Solución avanzada para empresas de gran envergadura.</p>
                         <ul class="list-unstyled mb-4">
-                            <li><i class="fas fa-check text-success me-2"></i> Diseño exclusivo a medida</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Facturación jurídica y SENIAT</li>
-                            <li><i class="fas fa-check text-success me-2"></i> Soporte técnico prioritario</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Diseño exclusivo a medida</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Facturación jurídica y SENIAT</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning me-2"></i> Soporte técnico prioritario</li>
                         </ul>
-                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Corporativo" target="_blank" class="btn btn-neon mt-auto">¡Lo quiero!</a>
+                        <a href="https://wa.me/<?php echo $telefono_ws; ?>?text=Quiero%20el%20Plan%20Corporativo" target="_blank" class="btn btn-neon-orange mt-auto text-center">¡Lo quiero!</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Demos Section -->
+    <section id="demos" class="py-5" style="background-color: #0e131f;">
+        <div class="container">
+            <h2 class="text-center mb-5 section-title fw-bold">Demos Disponibles</h2>
+            <?php if (!empty($demos)): ?>
+                <div class="row g-4">
+                    <?php foreach ($demos as $demo): ?>
+                        <div class="col-md-4">
+                            <div class="card card-plan p-4 h-100">
+                                <h4 class="fw-bold mb-2" style="color: #ff6600;"><?php echo htmlspecialchars($demo['titulo']); ?></h4>
+                                <p><?php echo htmlspecialchars($demo['descripcion']); ?></p>
+                                <a href="<?php echo htmlspecialchars($demo['enlace']); ?>" target="_blank" class="btn btn-neon-silver mt-auto text-center">Ver Demo</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-plan p-4 h-100">
+                            <h4 class="fw-bold mb-2" style="color: #ff6600;">Demo Estética</h4>
+                            <p class="text-muted">Plantilla de prueba optimizada para negocios de belleza y cuidado personal.</p>
+                            <a href="#" class="btn btn-neon-silver mt-auto text-center">Ver Demo</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-plan p-4 h-100">
+                            <h4 class="fw-bold mb-2" style="color: #ff6600;">Demo Delivery</h4>
+                            <p class="text-muted">Sistema interactivo para restaurantes y pedidos rápidos.</p>
+                            <a href="#" class="btn btn-neon-silver mt-auto text-center">Ver Demo</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-plan p-4 h-100">
+                            <h4 class="fw-bold mb-2" style="color: #ff6600;">Demo Comercial</h4>
+                            <p class="text-muted">Estructura corporativa para tiendas y servicios profesionales.</p>
+                            <a href="#" class="btn btn-neon-silver mt-auto text-center">Ver Demo</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -182,8 +286,8 @@ $instagram = isset($config['instagram_url']) && !empty($config['instagram_url'])
     <footer id="contacto">
         <div class="container">
             <p class="mb-2">© 2026 EM Digital VE. Todos los derechos reservados.</p>
-            <p>
-                Síguenos en Instagram: <a href="<?php echo $instagram; ?>" target="_blank" style="color: #00ffcc; text-decoration: none;">@EM.digital.ve</a>
+            <p class="mb-0">
+                Síguenos en Instagram: <a href="<?php echo $instagram; ?>" target="_blank" style="color: #ff6600; text-decoration: none; font-weight: 600;">@EM.digital.ve</a>
             </p>
         </div>
     </footer>
