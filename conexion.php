@@ -1,10 +1,10 @@
 <?php
-// Lee las variables de entorno de Render (Clever Cloud) o usa los valores locales de XAMPP por defecto
-$host     = getenv('DB_HOST')     ?: (getenv('MYSQLHOST')     ?: '127.0.0.1');
-$dbname   = getenv('DB_NAME')     ?: (getenv('MYSQLDATABASE') ?: 'emdigitalve_db');
-$user     = getenv('DB_USER')     ?: (getenv('MYSQLUSER')     ?: 'root');
-$password = getenv('DB_PASSWORD') ?: (getenv('MYSQLPASSWORD') ?: '');
-$port     = getenv('DB_PORT')     ?: (getenv('MYSQLPORT')     ?: '3306');
+// Conexión directa a la base de datos de Clever Cloud para producción en Render
+$host     = 'b9i5qmm2v08v6n88j9lj-mysql.services.clever-cloud.com';
+$dbname   = 'b9i5qmm2v08v6n88j9lj';
+$user     = 'uz8w9y5f46t47ca1';
+$password = 'Tg1LjpdvH7wJV53sfMV4';
+$port     = '3306';
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
