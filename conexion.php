@@ -1,9 +1,9 @@
 <?php
-// Conexión local definitiva con el usuario root de XAMPP
+// Configuración exacta para que abra en tu XAMPP local
 $host     = '127.0.0.1';
 $dbname   = 'emdigitalve_db';
-$user     = 'root'; // <--- El usuario por defecto de XAMPP
-$password = '';     // <--- Vacío por defecto en XAMPP
+$user     = 'root';
+$password = '';
 $port     = '3306';
 
 try {
