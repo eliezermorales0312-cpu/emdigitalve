@@ -1,9 +1,9 @@
 <?php
-// Conexión local definitiva para XAMPP - EM Digital VE
+// Conexión local definitiva con el usuario root de XAMPP
 $host     = '127.0.0.1';
 $dbname   = 'emdigitalve_db';
-$user     = 'admin';
-$password = 'Eliezer26072104';
+$user     = 'root'; // <--- El usuario por defecto de XAMPP
+$password = '';     // <--- Vacío por defecto en XAMPP
 $port     = '3306';
 
 try {
